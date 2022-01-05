@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 
-namespace DoctorsOffice
+namespace DoctorsOffice.Models
 {
   public class DoctorsOfficeContextFactory : IDesignTimeDbContextFactory<DoctorsOfficeContext>
   {
