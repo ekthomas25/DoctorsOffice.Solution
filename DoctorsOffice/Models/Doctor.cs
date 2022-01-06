@@ -19,5 +19,9 @@ namespace DoctorsOffice.Models
 
     public virtual ICollection<DoctorPatient> JoinDoctorPatients { get;}
     public virtual ICollection<DoctorSpecialty> JoinDoctorSpecialties { get;}
+    public string FullName
+    {
+      get { return FirstName + " " + LastName ;}
+    }
   }
 }
