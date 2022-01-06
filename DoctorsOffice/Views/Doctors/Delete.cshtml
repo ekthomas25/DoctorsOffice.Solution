@@ -1,0 +1,14 @@
+@{
+  Layout = "_Layout";
+}
+
+@model DoctorsOffice.Models.Doctor
+
+Are you sure you want to delete @Model.FirstName @Model.LastName's records?
+
+@using (Html.BeginForm())
+{
+  <button type="submit" value="Yes" class="btn btn-light"> Yes</button>
+}
+
+<button class="btn btn-light">@Html.ActionLink("No", "Details", new { id = Model.DoctorId, @class = "button-link" })</button>

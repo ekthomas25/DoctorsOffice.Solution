@@ -1,0 +1,57 @@
+@{
+  Layout = "_Layout";
+}
+
+@model DoctorsOffice.Models.Doctor
+
+<h2>Doctor Details</h2>
+<hr />
+<h3>Dr. @Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)</h3>
+<h4>Specialties:</h4>
+@if(@Model.JoinDoctorSpecialties.Count == 0)
+{
+  <p>This doctor is not trained in any specialties</p>
+}
+else
+{
+  <ul>
+    @foreach(var join in Model.JoinDoctorSpecialties)
+    {
+      <li>@join.Specialty.Description</li>
+      @using (Html.BeginForm("DeleteSpecialty", "Specialties"))
+      {
+        @Html.Hidden("doctorId", @Model.DoctorId);
+        @Html.Hidden("joinId", @join.DoctorSpecialtyId);
+        <input type="submit" value="Delete"/>
+      }
+    }
+  </ul>
+}
+
+<h4>Patient List:</h4>
+@if(@Model.JoinDoctorPatients.Count == 0)
+{
+  <p>This doctor has no patients.</p>
+}
+else
+{
+  <ul>
+    @foreach(var join in Model.JoinDoctorPatients)
+    {
+      <li>@join.Patient.FirstName @join.Patient.LastName</li>
+      @using (Html.BeginForm("DeletePatient", "Patients"))
+      {
+
+        @Html.Hidden("doctorId", @Model.DoctorId);
+        @Html.Hidden("joinId", @join.DoctorPatientId);
+        <input type="submit" value="Delete"/>
+      }
+    }
+  </ul>
+}
+
+<p>@Html.ActionLink("Edit Doctor", "Edit", new { id = Model.DoctorId })</p>
+<p>@Html.ActionLink("Delete Doctor", "Delete", new { id = Model.DoctorId })</p>
+<p>@Html.ActionLink("Back to List", "Index")</p>
+<p>@Html.ActionLink("Home", "Index", "Home")</p>
+<p>@Html.ActionLink("Add Specialty", "AddSpecialty")</p>

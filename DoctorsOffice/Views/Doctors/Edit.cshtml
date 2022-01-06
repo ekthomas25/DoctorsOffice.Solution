@@ -1,0 +1,23 @@
+@{
+  Layout = "_Layout";
+}
+
+@model DoctorsOffice.Models.Doctor
+
+<h2>Edit Doctor</h2>
+<hr />
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.DoctorId)
+
+  @Html.LabelFor(model => model.FirstName, "First Name")
+  @Html.TextBoxFor(model => model.FirstName)
+  
+  @Html.LabelFor(model => model.LastName, "Last Name")
+  @Html.TextBoxFor(model => model.LastName)
+
+  <input type="submit" value="Save" class="btn btn-light" />
+}
+
+<p>@Html.ActionLink("Back to Details", "Details", new { id = Model.DoctorId })
