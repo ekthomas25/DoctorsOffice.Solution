@@ -74,7 +74,7 @@ namespace DoctorsOffice.Controllers
     public ActionResult AddDoctor(int id)
     {
       var thisPatient = _db.Patients.FirstOrDefault(patient => patient.PatientId == id);
-      ViewBag.DoctorId = new SelectList(_db.Doctors, "DoctorId", "FirstName LastName");
+      ViewBag.DoctorId = new SelectList(_db.Doctors, "DoctorId", "FullName");
       return View(thisPatient);
     }
 
@@ -83,10 +83,19 @@ namespace DoctorsOffice.Controllers
     {
       if (DoctorId != 0)
       {
-        _db.DoctorPatient.Add(new DoctorPatient() { DoctorId = DoctorId, PatientId = patient.PatientId });
+        _db.DoctorPatient.Add(new DoctorPatient() { DoctorId = DoctorId, PatientId = patient.PatientId,});
       }
       _db.SaveChanges();
       return RedirectToAction("Details", new { id = patient.PatientId });
+    }
+
+    [HttpPost]
+    public ActionResult DeleteDoctor(int joinId, int patientId)
+    {
+      var joinEntry = _db.DoctorPatient.FirstOrDefault(joinEntry => joinEntry.DoctorPatientId == joinId);
+      _db.DoctorPatient.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = patientId });
     }
   }
 }
