@@ -1,0 +1,59 @@
+@{
+  Layout = "_Layout";
+}
+
+@model DoctorsOffice.Models.Patient
+
+<h2>Patient Details</h2>
+
+<h3>First Name: @Html.DisplayFor(model => model.FirstName)</h3>
+<h3>Last Name: @Html.DisplayFor(model => model.LastName)</h3>
+
+@if (@Model.JoinDoctorPatients.Count == 0)
+{
+  <p>This patient has not chosen a doctor.</p>
+}
+else
+{
+  <h3>Doctors:</h3>
+  <ul>
+    @foreach (var join in Model.JoinDoctorPatients)
+    {
+      <li>@join.Doctor.FirstName @join.Doctor.LastName</li>
+      @using (Html.BeginForm("DeleteDoctor", "Patients"))
+      {
+        @Html.Hidden("patientId", @Model.PatientId);
+        @Html.Hidden("joinId", @join.DoctorPatientId);
+        <input type="submit" value="Delete" />
+      }
+    }
+  </ul>
+}
+
+@* 
+@if (@Model.JoinDoctorSpecialties.Count == 0)
+{
+  <p>This patient does not belong to any specialties.</p>
+}
+else
+{
+  <h3>Specialties:</h3>
+  <ul>
+    @foreach (var join in Model.JoinDoctorSpecialties)
+    {
+      <li>@join.Specialties.Description</li>
+      @using (Html.BeginForm("DeleteSpecialty", "Patients"))
+      {
+        @Html.Hidden("patientId", @Model.PatientId);
+        @Html.Hidden("joinId", @join.DoctorSpecialtyId);
+        <input type="submit" value="Delete" />
+      }
+    }
+  </ul>
+}
+*@
+
+<p>@Html.ActionLink("Edit Patient", "Edit", new { id = Model.PatientId })</p>
+<p>@Html.ActionLink("Delete Patient", "Delete", new { id = Model.PatientId })</p>
+<p>@Html.ActionLink("Assign a Doctor", "AddDoctor", new { id = Model.PatientId })</p>
+<p>@Html.ActionLink("Back to Patients", "Index")</p>

@@ -1,0 +1,15 @@
+@{
+  Layout = "_Layout";
+}
+
+@model DoctorsOffice.Models.Patient;
+
+<h2>Assign a Doctor to a Patient</h2>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.PatientId)
+  @Html.Label("Select a Doctor:")
+  @Html.DropDownList("DoctorId")
+  <input type="submit" value="Add Doctor" />
+}

@@ -1,0 +1,17 @@
+@{
+  Layout = "_Layout";
+}
+
+@model DoctorsOffice.Models.Patient;
+
+<h2>Create a new patient record</h2>
+
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.FirstName, "First Name:")
+  @Html.TextBoxFor(model => model.FirstName)
+  <br>
+  @Html.LabelFor(model => model.LastName, "Last Name:")
+  @Html.TextBoxFor(model => model.LastName)
+  <input type="submit" value="Create Record" />
+}
