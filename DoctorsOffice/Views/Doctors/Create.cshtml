@@ -4,6 +4,7 @@
 
 @model DoctorsOffice.Models.Doctor
 
+<h1>Patient Tracker</h1>
 <h3>Add a new Doctor</h3>
 
 @using (Html.BeginForm())
@@ -15,7 +16,7 @@
   @Html.TextBoxFor(model => model.LastName)
 
   @Html.Label("Specialty")
-  @Html.DropDownList("SpecialtyId")
+  @Html.DropDownList("SpecialtyID")
   <input type="submit" value="Add Doctor" class="btn btn-light" />
 }
 

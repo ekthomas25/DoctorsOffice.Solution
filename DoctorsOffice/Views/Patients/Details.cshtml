@@ -4,7 +4,8 @@
 
 @model DoctorsOffice.Models.Patient
 
-<h2>Patient Details</h2>
+<h1>Patient Tracker</h1>
+<h2>Details</h2>
 
 <h3>First Name: @Html.DisplayFor(model => model.FirstName)</h3>
 <h3>Last Name: @Html.DisplayFor(model => model.LastName)</h3>
@@ -29,29 +30,6 @@ else
     }
   </ul>
 }
-
-@* 
-@if (@Model.JoinDoctorSpecialties.Count == 0)
-{
-  <p>This patient does not belong to any specialties.</p>
-}
-else
-{
-  <h3>Specialties:</h3>
-  <ul>
-    @foreach (var join in Model.JoinDoctorSpecialties)
-    {
-      <li>@join.Specialties.Description</li>
-      @using (Html.BeginForm("DeleteSpecialty", "Patients"))
-      {
-        @Html.Hidden("patientId", @Model.PatientId);
-        @Html.Hidden("joinId", @join.DoctorSpecialtyId);
-        <input type="submit" value="Delete" />
-      }
-    }
-  </ul>
-}
-*@
 
 <p>@Html.ActionLink("Edit Patient", "Edit", new { id = Model.PatientId })</p>
 <p>@Html.ActionLink("Delete Patient", "Delete", new { id = Model.PatientId })</p>

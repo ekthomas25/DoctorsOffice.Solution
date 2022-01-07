@@ -4,11 +4,13 @@
 
 @model DoctorsOffice.Models.Doctor;
 
+<h1>Patient Tracker</h1>
 <h2>Assign a specialty to this doctor</h2>
+
 @using (Html.BeginForm())
 {
   @Html.HiddenFor(model => model.DoctorId)
   @Html.Label("Select a Specialty:")
-  @Html.DropDownList("SpecialtyId", "Description")
-  <input type="submit" value="Add Specialty"/>
+  @Html.DropDownList("SpecialtyID")
+  <input type="submit" value="Add Specialty" />
 }
