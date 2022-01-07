@@ -19,23 +19,24 @@ namespace DoctorsOffice.Controllers
     public ActionResult Index()
     {
       List<Doctor> model = _db.Doctors.ToList();
+
       return View(model);
     }
 
     public ActionResult Create()
     {
-      ViewBag.SpecialtyId = new SelectList(_db.Specialties, "SpecialtyId", "Description");
+      ViewBag.SpecialtyId = new SelectList(_db.Specialties, "SpecialtyID", "Description");
       return View();
     }
 
     [HttpPost]
-    public ActionResult Create(Doctor doctor, int SpecialtyId)
+    public ActionResult Create(Doctor doctor, int SpecialtyID)
     {
       _db.Doctors.Add(doctor);
       _db.SaveChanges();
-      if (SpecialtyId != 0)
+      if (SpecialtyID != 0)
       {
-        _db.DoctorSpecialty.Add(new DoctorSpecialty() { SpecialtyId = SpecialtyId, DoctorId = doctor.DoctorId });
+        _db.DoctorSpecialty.Add(new DoctorSpecialty() { SpecialtyId = SpecialtyID, DoctorId = doctor.DoctorId });
         _db.SaveChanges();
       }
       return RedirectToAction("Index");
@@ -85,16 +86,16 @@ namespace DoctorsOffice.Controllers
     public ActionResult AddSpecialty(int id)
     {
       var thisDoctor = _db.Doctors.FirstOrDefault(doctor => doctor.DoctorId == id);
-      ViewBag.SpecialtyId = new SelectList(_db.Specialties, "SpecialtyId", "Description");
+      ViewBag.SpecialtyId = new SelectList(_db.Specialties, "SpecialtyID", "Description");
       return View(thisDoctor);
     }
 
     [HttpPost]
-    public ActionResult AddSpecialty(Doctor doctor, int SpecialtyId)
+    public ActionResult AddSpecialty(Doctor doctor, int SpecialtyID)
     {
-      if (SpecialtyId != 0)
+      if (SpecialtyID != 0)
       {
-        _db.DoctorSpecialty.Add(new DoctorSpecialty() { SpecialtyId = SpecialtyId, DoctorId = doctor.DoctorId });
+        _db.DoctorSpecialty.Add(new DoctorSpecialty() { SpecialtyId = SpecialtyID, DoctorId = doctor.DoctorId });
       }
       _db.SaveChanges();
       return RedirectToAction("Details", new { id = doctor.DoctorId });
