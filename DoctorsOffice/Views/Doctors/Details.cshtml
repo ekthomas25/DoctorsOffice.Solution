@@ -4,13 +4,15 @@
 
 @model DoctorsOffice.Models.Doctor
 
+<h1>Patient Tracker</h1>
 <h2>Doctor Details</h2>
 <hr />
 <h3>Dr. @Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)</h3>
+
 <h4>Specialties:</h4>
 @if(@Model.JoinDoctorSpecialties.Count == 0)
 {
-  <p>This doctor is not trained in any specialties</p>
+  <div class="no-patients">This doctor is not trained in any specialties</div>
 }
 else
 {
@@ -18,11 +20,11 @@ else
     @foreach(var join in Model.JoinDoctorSpecialties)
     {
       <li>@join.Specialty.Description</li>
-      @using (Html.BeginForm("DeleteSpecialty", "Specialties"))
+      @using (Html.BeginForm("DeleteSpecialty", "Doctors"))
       {
         @Html.Hidden("doctorId", @Model.DoctorId);
         @Html.Hidden("joinId", @join.DoctorSpecialtyId);
-        <input type="submit" value="Delete"/>
+        <input type="submit" value="Delete" class="btn btn-light" />
       }
     }
   </ul>
@@ -31,7 +33,7 @@ else
 <h4>Patient List:</h4>
 @if(@Model.JoinDoctorPatients.Count == 0)
 {
-  <p>This doctor has no patients.</p>
+  <div class="no-patients">This doctor has no patients.</div>
 }
 else
 {
@@ -39,12 +41,12 @@ else
     @foreach(var join in Model.JoinDoctorPatients)
     {
       <li>@join.Patient.FirstName @join.Patient.LastName</li>
-      @using (Html.BeginForm("DeletePatient", "Patients"))
+      @using (Html.BeginForm("DeletePatient", "Doctors"))
       {
 
         @Html.Hidden("doctorId", @Model.DoctorId);
         @Html.Hidden("joinId", @join.DoctorPatientId);
-        <input type="submit" value="Delete"/>
+        <input type="submit" value="Delete" class="btn btn-light" />
       }
     }
   </ul>
@@ -54,4 +56,4 @@ else
 <p>@Html.ActionLink("Delete Doctor", "Delete", new { id = Model.DoctorId })</p>
 <p>@Html.ActionLink("Back to List", "Index")</p>
 <p>@Html.ActionLink("Home", "Index", "Home")</p>
-<p>@Html.ActionLink("Add Specialty", "AddSpecialty")</p>
+<p>@Html.ActionLink("Add Specialty", "AddSpecialty", new { id = Model.DoctorId })</p>
