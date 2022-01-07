@@ -1,0 +1,17 @@
+@{
+  Layout = "_Layout";
+}
+
+@model DoctorsOffice.Models.Specialty;
+
+<h2>Edit Specialty</h2>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.SpecialtyID)
+
+  @Html.LabelFor(model => model.Description)
+  @Html.EditorFor(model => model.Description)
+
+  <input type="submit" value="Save" />
+}

@@ -1,0 +1,13 @@
+@{
+  Layout = "_Layout";
+}
+
+@model DoctorsOffice.Models.Specialty;
+
+<h2>Are you sure you want to delete this specialty?</h2>
+
+@using (Html.BeginForm())
+{
+  <button type="submit" value="Yes" class="btn btn-light"> Yes</button>
+}
+<button class="btn btn-light">@Html.ActionLink("No", "Details", new { id = Model.SpecialtyID, @class = "button-link" })</button>
